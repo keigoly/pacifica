@@ -1,0 +1,56 @@
+<header>
+  <div class="container">
+    <%= link_to "Pacifica", root_path, id: "logo" %>
+    <ul class="header_right">
+      <% if logged_in? %>
+        <%= render 'posts/search_form' %>
+        <%= link_to new_post_path, data: { "turbolinks" => false }, class: "header_item" do %>
+          <i class="fas fa-music"></i>Create
+        <% end %>
+
+        <%= link_to users_path, class: "header_item" do %>
+          <i class="fas fa-user-friends"></i>Users
+        <% end %>
+
+        <div class="dropdown header_item">
+          <a href="#" class="dropdown-toggle account_menu" data-toggle="dropdown">
+            <%= icon_for(current_user) %>Account <b class="caret"></b>
+          </a>
+
+          <ul class="dropdown-menu account_items">
+            <li>
+              <%= icon_for(current_user) %>
+              <span class="user_name"><%= current_user.name %></span>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to current_user do %>
+              <i class="fas fa-user-alt"></i>My Profile
+              <% end %>
+            </li>
+            <li>
+              <%= link_to user_likes_path(current_user) do %>
+              <i class="fas fa-heart"></i>Likes
+              <% end %>
+            </li>
+            <li>
+              <%= link_to edit_user_path(current_user) do %>
+              <i class="fas fa-cog"></i>Settings
+              <% end %>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to logout_path, method: :delete do %>
+              <i class="fas fa-sign-out-alt"></i>Log Out
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <%= link_to login_path, class: "login_btn" do %>
+          <i class="fas fa-sign-in-alt"></i> Log In
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</header>

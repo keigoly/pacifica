@@ -1,0 +1,6 @@
+<%= form_for(@post, url: yield(:url)) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <%= f.text_area :content, class: 'form-control', placeholder: yield(:placeholder) %>
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
